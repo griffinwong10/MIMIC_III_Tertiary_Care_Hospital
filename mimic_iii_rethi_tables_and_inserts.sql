@@ -1,0 +1,46 @@
+-- INFO 210: Database Management Systems Final Project Summer 2019
+-- Drexel University College of Computing and Informatics
+ 
+--Johnson, A. E., Pollard, T. J., Shen, L., Lehman, L. H., Feng, M., Ghassemi, M., . . . Mark, R. G.
+-- (2016, May 24). MIMIC-III, a freely accessible critical care database. Retrieved July 1,
+-- 2019, from https://www.nature.com/articles/sdata201635/
+
+
+--The Following Tables and Inserts are by Ryan Rethi
+
+CREATE TABLE CRITICAL_CARE_UNIT (
+    CCU_ID INT PRIMARY KEY NOT NULL,
+    PATIENT_ID INT,
+    CARE_PROVIDER_ID INT,   
+    EXTENSION_NUMBER INT,
+    SPECIALITY_UNIT_TYPE VARCHAR(100),
+    FOREIGN KEY (CARE_PROVIDER_ID) REFERENCES CARE_PROVIDER(CARE_PROVIDER_ID),
+    FOREIGN KEY (PATIENT_ID) REFERENCES PATIENT(PATIENT_ID));
+
+
+INSERT INTO CRITICAL_CARE_UNIT VALUES ( 7, 4, 3, 11, “Brain Specialist”);
+INSERT INTO CRITICAL_CARE_UNIT VALUES ( 8, 5, 2, 10, “Cancer Center”);
+INSERT INTO CRITICAL_CARE_UNIT VALUES ( 9, 6, 1, 10, “Cancer Center”);
+
+
+CREATE TABLE TREATMENT (
+    PATIENT_ID INT,
+    CARE_PROIVIDER_ID INT,
+    FOREIGN KEY (CARE_PROVIDER_ID) REFERENCES CARE_PROVIDER(CARE_PROVIDER_ID),
+    FOREIGN KEY (PATIENT_ID) REFERENCES PATIENT(PATIENT_ID));
+
+INSERT INTO TREATMENT VALUES ( 7, 3);
+INSERT INTO TREATMENT VALUES ( 8, 4);
+INSERT INTO TREATMENT VALUES ( 9, 2);
+
+CREATE TABLE CARE_PROVIDER (
+    CARE_PROVIDER_ID INT PRIMARY KEY NOT NULL,
+    FIRST_NAME VARCHAR(100),
+    LAST_NAME VARCHAR(100),
+    TITLE VARCHAR(100),
+    SPECIALTY VARCHAR(100));
+
+INSERT INTO CARE_PROVIDER VALUES ( 1, 'John', 'Anderson', 'Dr.', 'Endocrinologist');
+INSERT INTO CARE_PROVIDER VALUES ( 3, 'Anna', 'Oyler', 'Dr.', 'Neurologist');
+INSERT INTO CARE_PROVIDER VALUES ( 4, 'Kyle', 'Mendez', 'Dr.', 'Cardiologist');
+
